@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Friend Req App V2" %></title>
+    <title><%= content_for(:title) || "Friend Request App" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -18,6 +18,22 @@
   </head>
 
   <body>
+    
+  <% if user_signed_in? %>
+      <p> <%= current_user.id %></p>
+      <%= button_to destroy_user_session_path, method: :delete do %>
+      Log Out
+      <% end %>
+      <%= link_to "Friend Requests", friend_requests_path%>
+  <% else %>
+      <%= button_to new_user_registration_path, method: :get do %>
+      Sign Up
+      <% end %>
+      <%= button_to new_user_session_path, method: :get do %>
+      Log In
+      <% end %>
+  <% end %>
+
     <%= yield %>
   </body>
 </html>

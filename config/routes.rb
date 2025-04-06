@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :friendships
-  resources :friend_requests
+  root to: "home#index"
+  resources :friendships, only: [ :index, :destroy ]
+  resources :friend_requests, only: [ :index, :new, :create, :destroy ]
+  post "/friend_requests/:id", to: "friend_requests#accept"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

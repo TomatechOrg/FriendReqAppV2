@@ -4,12 +4,29 @@
 
 <h1>Friend requests</h1>
 
-<div id="friend_requests">
-  <% @friend_requests.each do |friend_request| %>
+<h3>Incoming requests</h3>
+<div id="incoming_requests">
+  <% @incoming_requests.each do |friend_request| %>
+      <%= render friend_request %>
+      <%= button_to friend_request_path(friend_request), method: :post do %>
+        Accept
+      <% end %>
+      <%= button_to friend_request_path(friend_request), method: :delete do %>
+        Reject
+      <% end %>
+      <br>
+      <br>
+  <% end %>
+</div>
+<h3>Outgoing requests</h3>
+<div id="outgoing_requests">
+  <% @outgoing_requests.each do |friend_request| %>
     <%= render friend_request %>
-    <p>
-      <%= link_to "Show this friend request", friend_request %>
-    </p>
+    <%= button_to friend_request_path(friend_request), method: :delete do %>
+      Cancel
+    <% end %>
+    <br>
+    <br>
   <% end %>
 </div>
 

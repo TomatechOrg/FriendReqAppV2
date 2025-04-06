@@ -1,12 +1,11 @@
 <div id="<%= dom_id friend_request %>">
-  <p>
-    <strong>Sender:</strong>
-    <%= friend_request.sender_id %>
-  </p>
 
-  <p>
+  <% if current_user==friend_request.sender %>
     <strong>Receiver:</strong>
-    <%= friend_request.receiver_id %>
-  </p>
+    <%= friend_request.receiver.email %>
+  <% elsif current_user==friend_request.receiver %>
+    <strong>Sender:</strong>
+    <%= friend_request.sender.email %>
+  <% end %>
 
 </div>
