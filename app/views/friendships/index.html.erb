@@ -7,10 +7,12 @@
 <div id="friendships">
   <% @friendships.each do |friendship| %>
     <%= render friendship %>
-    <p>
-      <%= link_to "Show this friendship", friendship %>
-    </p>
+    <%= button_to friendship_path(friendship), method: :delete do %>
+      Unfriend
+    <% end %>
+    <br><br>
+
   <% end %>
 </div>
 
-<%= link_to "New friendship", new_friendship_path %>
+

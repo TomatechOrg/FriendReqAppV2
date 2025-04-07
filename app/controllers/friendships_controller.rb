@@ -1,9 +1,10 @@
 class FriendshipsController < ApplicationController
   before_action :set_friendship, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /friendships or /friendships.json
   def index
-    @friendships = Friendship.all
+    @friendships = current_user.friendships
   end
 
   # GET /friendships/1 or /friendships/1.json

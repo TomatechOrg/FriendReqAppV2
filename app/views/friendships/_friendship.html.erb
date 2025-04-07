@@ -1,12 +1,9 @@
 <div id="<%= dom_id friendship %>">
-  <p>
-    <strong>Primary friend:</strong>
-    <%= friendship.primary_friend_id %>
-  </p>
 
-  <p>
-    <strong>Secondary friend:</strong>
-    <%= friendship.secondary_friend_id %>
-  </p>
+  <% if current_user==friendship.primary_friend %>
+    <%= friendship.secondary_friend.email %>
+  <% elsif current_user==friendship.secondary_friend %>
+    <%= friendship.primary_friend.email %>
+  <% end %>
 
 </div>

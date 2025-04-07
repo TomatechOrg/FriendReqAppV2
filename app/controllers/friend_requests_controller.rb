@@ -33,11 +33,17 @@ class FriendRequestsController < ApplicationController
   def accept
     if !@friend_request.nil? && @friend_request.receiver == current_user
       # create a friendship based on the friend request
-      @friend_request.destroy!
-      respond_to do |format|
-        format.html { redirect_to friend_requests_path, status: :see_other, notice: "Friend request accepted." }
-        format.json { head :no_content }
+      friendship=Friendship.new()
+      friendship.primary_friend_id = @friend_request.sender_id
+      friendship.secondary_friend_id = @friend_request.receiver_id
+      if friendship.save
+         @friend_request.destroy!
+        respond_to do |format|
+          format.html { redirect_to friend_requests_path, status: :see_other, notice: "Friend request accepted." }
+          format.json { head :no_content }
+        end
       end
+     
     end
   end
 
