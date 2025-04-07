@@ -89,7 +89,6 @@ jobs:
           if-no-files-found: ignore
   
   deploy:
-    needs: test
     runs-on: ubuntu-latest
 
     steps:
