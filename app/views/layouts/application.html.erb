@@ -20,11 +20,13 @@
   <body>
     
   <% if user_signed_in? %>
-      <p> <%= current_user.id %></p>
+      <p> Your User ID: <%= current_user.id %></p>
       <%= button_to destroy_user_session_path, method: :delete do %>
       Log Out
       <% end %>
       <%= link_to "Friend Requests", friend_requests_path%>
+      <br>
+      <%= link_to "Friendships", friendships_path%>
   <% else %>
       <%= button_to new_user_registration_path, method: :get do %>
       Sign Up
