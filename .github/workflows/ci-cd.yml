@@ -1,7 +1,6 @@
-name: CI
+name: CI-CD
 
 on:
-  pull_request:
   push:
     branches: [ main ]
 
@@ -88,3 +87,19 @@ jobs:
           name: screenshots
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
+  
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Webfactory
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+      
+      - name: Deploy
+        run: ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_IP "rm -rf FriendReqAppV2/;git clone https://github.com/TomatechOrg/FriendReqAppV2.git; source FriendReqAppV2/deploy.sh"
