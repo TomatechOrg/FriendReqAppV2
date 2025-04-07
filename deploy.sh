@@ -8,4 +8,4 @@ pm2 stop proj_app
 cd FriendReqAppV2/
 bundle install
 rails db:migrate
-pm2 start "sudo ~/.rbenv/shims/server --binding 0.0.0.0 --port 3000" --name proj_app
+pm2 start "sudo ~/.rbenv/shims/rails server --binding 0.0.0.0 --port 3000" --name proj_app
